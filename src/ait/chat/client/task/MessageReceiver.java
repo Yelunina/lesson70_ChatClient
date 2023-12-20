@@ -14,7 +14,7 @@ public class MessageReceiver implements Runnable {
 
     @Override
     public void run() {
-        try (Socket socket = this.socket) {
+        try {
             BufferedReader socketReader = new BufferedReader((new InputStreamReader(socket.getInputStream())));
             while (true) {
                 String message = socketReader.readLine();

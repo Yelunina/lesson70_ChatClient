@@ -11,20 +11,17 @@ public class ChatClientAppl {
     public static void main(String[] args) {
         String serverHost = "127.0.0.1";
         int port = 9000;
-        try (Socket socket = new Socket(serverHost, port)) {
+        try  {
+            Socket socket = new Socket(serverHost, port);
             Thread sender = new Thread(new MessageSender(socket));
             Thread receiver = new Thread(new MessageReceiver(socket));
             receiver.setDaemon(true);
             receiver.start();
             sender.start();
-            sender.join();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
-
     }
 }
